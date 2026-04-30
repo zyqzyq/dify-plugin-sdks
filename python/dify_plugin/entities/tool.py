@@ -87,6 +87,7 @@ class ToolParameter(BaseModel):
         OBJECT = CommonParameterType.OBJECT.value
         ARRAY = CommonParameterType.ARRAY.value
         DYNAMIC_SELECT = CommonParameterType.DYNAMIC_SELECT.value
+        DYNAMIC_TREE_SELECT = CommonParameterType.DYNAMIC_TREE_SELECT.value
 
     class ToolParameterForm(Enum):
         SCHEMA = "schema"  # should be set while adding tool
@@ -103,6 +104,7 @@ class ToolParameter(BaseModel):
     form: ToolParameterForm = Field(..., description="The form of the parameter, schema/form/llm")
     llm_description: str | None = None
     required: bool | None = False
+    multiple: bool | None = False
     default: Union[int, float, str] | None = None
     min: Union[float, int] | None = None
     max: Union[float, int] | None = None

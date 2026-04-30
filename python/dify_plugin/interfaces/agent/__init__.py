@@ -292,10 +292,16 @@ class AgentStrategy(ToolLike[AgentInvokeMessage]):
             if parameter.type in {
                 ToolParameter.ToolParameterType.SELECT,
                 ToolParameter.ToolParameterType.SECRET_INPUT,
+                ToolParameter.ToolParameterType.DYNAMIC_SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_TREE_SELECT,
             }:
                 parameter_type = ToolParameter.ToolParameterType.STRING
             enum = []
-            if parameter.type == ToolParameter.ToolParameterType.SELECT:
+            if parameter.type in {
+                ToolParameter.ToolParameterType.SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_TREE_SELECT,
+            }:
                 enum = [option.value for option in parameter.options] if parameter.options else []
 
             message_tool.parameters["properties"][parameter.name] = (
@@ -335,10 +341,16 @@ class AgentStrategy(ToolLike[AgentInvokeMessage]):
             if parameter.type in {
                 ToolParameter.ToolParameterType.SELECT,
                 ToolParameter.ToolParameterType.SECRET_INPUT,
+                ToolParameter.ToolParameterType.DYNAMIC_SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_TREE_SELECT,
             }:
                 parameter_type = ToolParameter.ToolParameterType.STRING
             enum = []
-            if parameter.type == ToolParameter.ToolParameterType.SELECT:
+            if parameter.type in {
+                ToolParameter.ToolParameterType.SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_SELECT,
+                ToolParameter.ToolParameterType.DYNAMIC_TREE_SELECT,
+            }:
                 enum = [option.value for option in parameter.options] if parameter.options else []
 
             prompt_tool.parameters["properties"][parameter.name] = (

@@ -114,7 +114,7 @@ class EventParameter(BaseModel):
     required: bool | None = False
     multiple: bool | None = Field(
         default=False,
-        description="Whether the parameter is multiple select, only valid for select or dynamic-select type",
+        description="Whether the parameter is multiple select, only valid for select, dynamic-select or dynamic-tree-select type",
     )
     default: Union[int, float, str, list] | None = None
     min: Union[float, int] | None = None

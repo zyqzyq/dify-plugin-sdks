@@ -76,3 +76,45 @@ def test_fetch_parameter_options():
 
     tool = ToolImpl(runtime=ToolRuntime(credentials={}, user_id="test", session_id="test"), session=session)
     assert tool.fetch_parameter_options("test") == [ParameterOption(value="test", label=I18nObject(en_US="test"))]
+
+
+def test_fetch_tree_parameter_options():
+    """
+    Test that the Tool can fetch tree parameter options with nested children
+    """
+
+    class ToolImpl(Tool):
+        def _invoke(self, tool_parameters: Mapping) -> Generator[ToolInvokeMessage, None, None]:
+            yield self.create_text_message("Hello, world!")
+
+        def _fetch_parameter_options(self, parameter: str) -> list[ParameterOption]:
+            return [
+                ParameterOption(
+                    value="root",
+                    label=I18nObject(en_US="Root"),
+                    children=[
+                        ParameterOption(value="child1", label=I18nObject(en_US="Child 1")),
+                        ParameterOption(
+                            value="child2",
+                            label=I18nObject(en_US="Child 2"),
+                            children=[ParameterOption(value="grandchild", label=I18nObject(en_US="Grandchild"))],
+                        ),
+                    ],
+                )
+            ]
+
+    session = Session(
+        session_id="test",
+        executor=ThreadPoolExecutor(max_workers=1),
+        reader=StdioRequestReader(),
+        writer=StdioResponseWriter(),
+    )
+
+    tool = ToolImpl(runtime=ToolRuntime(credentials={}, user_id="test", session_id="test"), session=session)
+    options = tool.fetch_parameter_options("test")
+    assert len(options) == 1
+    assert options[0].value == "root"
+    assert options[0].children is not None
+    assert len(options[0].children) == 2
+    assert options[0].children[1].children is not None
+    assert options[0].children[1].children[0].value == "grandchild"

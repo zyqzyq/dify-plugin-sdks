@@ -39,6 +39,7 @@ class CommonParameterType(Enum):
     OBJECT = "object"
     ARRAY = "array"
     DYNAMIC_SELECT = "dynamic-select"
+    DYNAMIC_TREE_SELECT = "dynamic-tree-select"
 
 
 @docs(

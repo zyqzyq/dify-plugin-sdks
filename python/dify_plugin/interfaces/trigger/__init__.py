@@ -616,6 +616,10 @@ class TriggerSubscriptionConstructor(ABC, OAuthProviderProtocol):
             You can also return options with avatar URLs if available:
             >>> result = provider.fetch_parameter_options(parameter="github_repository_maintainer")
             >>> print(result)  # [ParameterOption(label="Joel", value="iamjoel", icon="https://avatars.githubusercontent.com/u/2120155?s=40&v=4")]
+
+            For tree selection, return options with nested `children`:
+            >>> result = provider.fetch_parameter_options(parameter="folder")
+            >>> print(result)  # [ParameterOption(label="Root", value="root", children=[ParameterOption(label="Child", value="child")])]
         """
         raise NotImplementedError(
             "This plugin should implement `_fetch_parameter_options` method to enable dynamic select parameter"
@@ -746,6 +750,9 @@ class Event(ABC):
         To be implemented by subclasses.
 
         Also, it's optional to implement, that's why it's not an abstract method.
+
+        For `dynamic-tree-select` parameters, you can return options with nested `children`
+        to build a hierarchical selection tree.
         """
         raise NotImplementedError(
             "This plugin should implement `_fetch_parameter_options` method to enable dynamic select parameter"

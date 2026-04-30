@@ -40,6 +40,9 @@ class ParameterOption(BaseModel):
     icon: str | None = Field(
         default=None, description="The icon of the option, can be a URL or a base64 encoded string"
     )
+    children: list["ParameterOption"] | None = Field(
+        default=None, description="The children options of the option, used for tree select"
+    )
 
     @field_validator("value", mode="before")
     @classmethod
@@ -65,3 +68,6 @@ class ParameterAutoGenerate(BaseModel):
 )
 class ParameterTemplate(BaseModel):
     enabled: bool = Field(..., description="Whether the parameter is jinja enabled")
+
+
+ParameterOption.model_rebuild()

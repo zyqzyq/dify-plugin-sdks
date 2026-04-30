@@ -63,6 +63,8 @@ class AgentStrategyParameter(BaseModel):
         # MCP object and array type parameters
         OBJECT = CommonParameterType.OBJECT.value
         ARRAY = CommonParameterType.ARRAY.value
+        DYNAMIC_SELECT = CommonParameterType.DYNAMIC_SELECT.value
+        DYNAMIC_TREE_SELECT = CommonParameterType.DYNAMIC_TREE_SELECT.value
 
     name: str = Field(..., description="The name of the parameter")
     label: I18nObject = Field(..., description="The label presented to the user")
