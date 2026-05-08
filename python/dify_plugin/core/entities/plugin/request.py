@@ -334,6 +334,7 @@ class DynamicParameterFetchParameterOptionsRequest(BaseModel):
     provider_action: str
     user_id: str
     parameter: str
+    parameter_values: dict[str, Any] | None = None
 
     model_config = ConfigDict(protected_namespaces=())
 

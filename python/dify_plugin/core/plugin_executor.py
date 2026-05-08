@@ -648,7 +648,7 @@ class PluginExecutor:
         action_instance: DynamicSelectProtocol | None = self._get_dynamic_parameter_action(session=session, data=data)
         assert action_instance, f"Provider `{data.provider}` not found"
         return {
-            "options": action_instance.fetch_parameter_options(parameter=data.parameter),
+            "options": action_instance.fetch_parameter_options(parameter=data.parameter, parameter_values=data.parameter_values),
         }
 
     def datasource_crawl_website(self, session: Session, data: DatasourceCrawlWebsiteRequest):

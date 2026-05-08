@@ -1,10 +1,10 @@
-from typing import Protocol
+from typing import Any, Protocol
 
 from dify_plugin.entities import ParameterOption
 
 
 class DynamicSelectProtocol(Protocol):
-    def fetch_parameter_options(self, parameter: str) -> list[ParameterOption]:
+    def fetch_parameter_options(self, parameter: str, parameter_values: dict[str, Any] | None = None) -> list[ParameterOption]:
         """
         Fetch the parameter options.
 
@@ -18,5 +18,8 @@ class DynamicSelectProtocol(Protocol):
         by providing the access token of the user, we could fetch the channel list of the user.
 
         That's what this protocol is for.
+
+        :param parameter: The name of the parameter to fetch options for.
+        :param parameter_values: Other parameter values that may affect the options.
         """
         ...

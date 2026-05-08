@@ -112,6 +112,7 @@ class ToolParameter(BaseModel):
     options: list[ToolParameterOption] | None = None
     # MCP object and array type parameters use this field to store the schema
     input_schema: Mapping[str, Any] | None = None
+    dynamic_select_lazy_load: bool | None = False
 
 
 @docs(
