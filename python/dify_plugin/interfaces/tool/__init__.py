@@ -341,7 +341,7 @@ class Tool(ToolLike[ToolInvokeMessage]):
     def _invoke(self, tool_parameters: dict) -> Generator[ToolInvokeMessage, None, None]:
         pass
 
-    def _fetch_parameter_options(self, parameter: str) -> list[ParameterOption]:
+    def _fetch_parameter_options(self, parameter: str, parameter_values: dict[str, Any] | None = None) -> list[ParameterOption]:
         """
         Fetch the parameter options of the tool.
 
@@ -351,6 +351,9 @@ class Tool(ToolLike[ToolInvokeMessage]):
 
         For `dynamic-tree-select` parameters, you can return options with nested `children`
         to build a hierarchical selection tree.
+
+        :param parameter: The name of the parameter to fetch options for.
+        :param parameter_values: Other parameter values that may affect the options.
         """
         raise NotImplementedError(
             "This plugin should implement `_fetch_parameter_options` method to enable dynamic select parameter"
@@ -369,11 +372,13 @@ class Tool(ToolLike[ToolInvokeMessage]):
     def get_runtime_parameters(self) -> list[ToolParameter]:
         return self._get_runtime_parameters()
 
-    def fetch_parameter_options(self, parameter: str) -> list[ParameterOption]:
+    def fetch_parameter_options(self, parameter: str, parameter_values: dict[str, Any] | None = None) -> list[ParameterOption]:
         """
         Fetch the parameter options of the tool.
 
         To be implemented by subclasses.
 
+        :param parameter: The name of the parameter to fetch options for.
+        :param parameter_values: Other parameter values that may affect the options.
         """
-        return self._fetch_parameter_options(parameter)
+        return self._fetch_parameter_options(parameter, parameter_values)
