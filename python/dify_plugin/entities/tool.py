@@ -14,6 +14,7 @@ from dify_plugin.core.utils.yaml_loader import load_yaml_file
 from dify_plugin.entities import I18nObject, ParameterOption
 from dify_plugin.entities.invoke_message import InvokeMessage
 from dify_plugin.entities.model.message import PromptMessageTool
+from dify_plugin.entities.model.provider import FormShowOnObject
 from dify_plugin.entities.oauth import OAuthSchema
 from dify_plugin.entities.provider_config import (
     CommonParameterType,
@@ -113,6 +114,7 @@ class ToolParameter(BaseModel):
     # MCP object and array type parameters use this field to store the schema
     input_schema: Mapping[str, Any] | None = None
     dynamic_select_lazy_load: bool | None = False
+    show_on: list[FormShowOnObject] = Field(default_factory=list)
 
 
 @docs(
