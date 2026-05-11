@@ -89,6 +89,8 @@ class ToolParameter(BaseModel):
         ARRAY = CommonParameterType.ARRAY.value
         DYNAMIC_SELECT = CommonParameterType.DYNAMIC_SELECT.value
         DYNAMIC_TREE_SELECT = CommonParameterType.DYNAMIC_TREE_SELECT.value
+        DATE = CommonParameterType.DATE.value
+        DATE_PICKER = CommonParameterType.DATE_PICKER.value
 
     class ToolParameterForm(Enum):
         SCHEMA = "schema"  # should be set while adding tool

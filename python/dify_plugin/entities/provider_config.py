@@ -40,6 +40,8 @@ class CommonParameterType(Enum):
     ARRAY = "array"
     DYNAMIC_SELECT = "dynamic-select"
     DYNAMIC_TREE_SELECT = "dynamic-tree-select"
+    DATE = "date"
+    DATE_PICKER = "date-picker"
 
 
 @docs(
