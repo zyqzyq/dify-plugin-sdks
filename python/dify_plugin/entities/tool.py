@@ -117,6 +117,10 @@ class ToolParameter(BaseModel):
     input_schema: Mapping[str, Any] | None = None
     dynamic_select_lazy_load: bool | None = False
     show_on: list[FormShowOnObject] = Field(default_factory=list)
+    reset_on_change: list[str] = Field(
+        default_factory=list,
+        description="Sibling parameter names that reset this parameter to its default or empty value when changed",
+    )
 
 
 @docs(
